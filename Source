@@ -1,0 +1,69 @@
+#include "tree_static.hpp"
+
+
+#include <iostream>
+
+void PrintNodeLabel ( const Tree & _t, int _nodeIndex )
+{
+	int index = _nodeIndex;
+	while ( index != 0 )
+	{
+		index = TreeGetParentIndex( _t, index );
+		std::cout << "    ";
+	}
+	std::cout << TreeGetLabel( _t, _nodeIndex ) << std::endl;
+}
+
+int main()
+{
+	Tree * pTree = TreeCreate( 16 );
+
+	TreeSetLabel( *pTree, 0, "NURE" );
+
+	TreeSetLabel( *pTree, 1, "AKT" );
+	TreeSetLabel( *pTree, 2, "ET" );
+	TreeSetLabel( *pTree, 3, "KIY" );
+	TreeSetLabel( *pTree, 4, "KN" );
+
+	TreeSetLabel( *pTree, 5, "AKIT" );
+	TreeSetLabel( *pTree, 6, "REA" );
+	TreeSetLabel( *pTree, 7, "CI" );
+
+	TreeSetLabel( *pTree, 8, "BMI" );
+	TreeSetLabel( *pTree, 9, "MN" );
+	TreeSetLabel( *pTree, 10, "OT" );
+
+	TreeSetLabel( *pTree, 11, "BIKC" );
+	TreeSetLabel( *pTree, 12, "KI" );
+
+	TreeSetLabel( *pTree, 13, "BPC" );
+	TreeSetLabel( *pTree, 14, "KN" );
+	TreeSetLabel( *pTree, 15, "PI" );
+
+
+	TreeSetParentIndex( *pTree, 1, 0 );
+	TreeSetParentIndex( *pTree, 2, 0 );
+	TreeSetParentIndex( *pTree, 3, 0 );
+	TreeSetParentIndex( *pTree, 4, 0 );
+
+
+	TreeSetParentIndex( *pTree, 5, 1 );
+	TreeSetParentIndex( *pTree, 6, 1 );
+	TreeSetParentIndex( *pTree, 7, 1 );
+
+	TreeSetParentIndex( *pTree, 8, 2 );
+	TreeSetParentIndex( *pTree, 9, 2 );
+	TreeSetParentIndex( *pTree, 10, 2 );
+
+	TreeSetParentIndex( *pTree, 11, 3 );
+	TreeSetParentIndex( *pTree, 12, 3 );
+
+	TreeSetParentIndex( *pTree, 13, 4 );
+	TreeSetParentIndex( *pTree, 14, 4 );
+	TreeSetParentIndex( *pTree, 15, 4 );
+
+	TreeDirectWalk( *pTree, PrintNodeLabel );
+
+	TreeDestroy( pTree );
+	return 0;
+}
